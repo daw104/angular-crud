@@ -1,5 +1,6 @@
 import {NgOptimizedImage} from "@angular/common";
 import {NgModule} from '@angular/core';
+import {FormsModule} from "@angular/forms";
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
@@ -10,7 +11,9 @@ import {RecipeDetailComponent} from './recipes/recipe-detail/recipe-detail.compo
 import {RecipeItemComponent} from './recipes/recipe-list/recipe-item/recipe-item.component';
 import {ShoppingListComponent} from './shopping-list/shopping-list.component';
 import {ShoppingEditComponent} from './shopping-list/shopping-edit/shopping-edit.component';
-import { GalleryComponent } from './gallery/gallery.component';
+import {GalleryComponent} from './gallery/gallery.component';
+import {UserComponent} from './user/user.component';
+import {UserListComponent} from './user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,14 @@ import { GalleryComponent } from './gallery/gallery.component';
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    GalleryComponent
+    GalleryComponent,
+    UserComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

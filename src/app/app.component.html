@@ -9,6 +9,10 @@
                    *ngIf="featureClick == 'gallery'"></app-gallery>
       <app-recipes *ngIf="featureClick == 'recipe'"></app-recipes>
       <app-shopping-list *ngIf="featureClick == 'shopping'"></app-shopping-list>
+      <ng-container *ngIf="featureClick == 'user'">
+        <app-user (userAdded)="addUser($event)"></app-user>
+        <app-user-list [users]="users"></app-user-list>
+      </ng-container>
     </div>
   </div>
 </div>

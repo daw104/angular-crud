@@ -8,15 +8,18 @@ import {Component} from '@angular/core';
 export class AppComponent {
   variableDelPadre!: string;
   featureClick!: any;
+  users: string [] = [];
 
   onFeatureClick(feature: any) {
     this.featureClick = feature;
   }
 
-
   capturaElEventoDelHijo(event: any) {
     this.variableDelPadre = event;
   }
 
-
+  addUser(user: string) {
+    this.users.push(user);
+  }
+  
 }
