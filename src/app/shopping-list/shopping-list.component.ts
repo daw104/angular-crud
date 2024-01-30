@@ -7,10 +7,7 @@ import {Ingredient} from "../../model/Ingredient";
   styleUrls: ['./shopping-list.component.scss']
 })
 export class ShoppingListComponent implements OnInit {
-  ingridients: Ingredient[] = [
-    new Ingredient('ingredient 1', 12),
-    new Ingredient('ingredient 2', 2)
-  ];
+  ingridients: Ingredient[] = [];
 
   constructor() {
   }
@@ -25,5 +22,8 @@ export class ShoppingListComponent implements OnInit {
     return ingredientes;
   }
 
+  public addIngredient(ingredient: Ingredient) {
+    this.ingridients.push(ingredient);
+  }
 
 }
