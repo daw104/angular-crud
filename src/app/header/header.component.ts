@@ -6,24 +6,15 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  @Output() galleryClick = new EventEmitter<any>();
-  @Output() recipeClick = new EventEmitter<any>();
-  @Output() shoppingListClick = new EventEmitter<any>();
+  @Output() featureSelected = new EventEmitter<any>();
   @Input() title!: string;
 
   constructor() {
   }
 
-  public onRecipeClick() {
-    this.recipeClick.emit(true);
+  public onSelectClick(feature: any) {
+    this.featureSelected.emit(feature);
   }
 
-  public onGalleryClick() {
-    this.galleryClick.emit(true);
-  }
-
-  public onShoppingListClick() {
-    this.shoppingListClick.emit(true);
-  }
 
 }

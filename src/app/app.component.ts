@@ -7,31 +7,16 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   variableDelPadre!: string;
-  showGalery!: boolean;
-  showRecipe!: boolean;
-  showShoppingList!: boolean;
+  featureClick!: any;
 
-  onGalleryClick(show: any) {
-    this.showGalery = show;
-    this.showRecipe = !show;
-    this.showShoppingList = !show;
+  onFeatureClick(feature: any) {
+    this.featureClick = feature;
   }
 
-  onRecipeClick(show: any) {
-    this.showRecipe = show;
-    this.showGalery = !show;
-    this.showShoppingList = !show;
-  }
 
   capturaElEventoDelHijo(event: any) {
-    console.log(event)
     this.variableDelPadre = event;
   }
 
-  onShoppingListClick(show: any) {
-    this.showShoppingList = show;
-    this.showGalery = !show;
-    this.showRecipe = !show;
-  }
 
 }

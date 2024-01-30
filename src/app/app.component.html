@@ -1,16 +1,14 @@
 <app-header
-  (galleryClick)="onGalleryClick($event)"
-  (recipeClick)="onRecipeClick($event)"
-  (shoppingListClick)="onShoppingListClick($event)">
+  (featureSelected)="onFeatureClick($event)">
 </app-header>
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <app-gallery [inputDelHijo]="variableDelPadre" (eventoClickDelHijo)="capturaElEventoDelHijo($event)"
-                   *ngIf="showGalery"></app-gallery>
-      <app-recipes *ngIf="showRecipe"></app-recipes>
-      <app-shopping-list *ngIf="showShoppingList"></app-shopping-list>
+                   *ngIf="featureClick == 'gallery'"></app-gallery>
+      <app-recipes *ngIf="featureClick == 'recipe'"></app-recipes>
+      <app-shopping-list *ngIf="featureClick == 'shopping'"></app-shopping-list>
     </div>
   </div>
 </div>
