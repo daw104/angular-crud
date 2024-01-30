@@ -1,18 +1,23 @@
+<h2>{{ title }}</h2>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Recipe Book</a>
+        <a class="nav-link" href="#" (click)="onRecipeClick()">Recipe Book</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Shopping List</a>
+        <a class="nav-link" href="#" (click)="onShoppingListClick()">Shopping List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="onGalleryClick()">Gallery</a>
       </li>
     </ul>
 
