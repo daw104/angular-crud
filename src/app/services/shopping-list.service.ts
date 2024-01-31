@@ -21,4 +21,13 @@ export class ShoppingListService {
     this.ingredientesChanged.emit(this.ingridients.slice());
   }
 
+  addIngredients(ingredient: Ingredient[]) {
+    ingredient.forEach(ingredient => {
+      const exists = this.ingridients.some(objeto => objeto.name === ingredient.name);
+      if (!exists) {
+        this.ingridients.push(ingredient);
+      }
+    });
+    this.ingredientesChanged.emit(this.ingridients.slice());
+  }
 }
