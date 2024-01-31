@@ -21,11 +21,14 @@ export class ShoppingListService {
     this.ingredientesChanged.emit(this.ingridients.slice());
   }
 
-  addIngredients(ingredient: Ingredient[]) {
+  addIngredientsToShoppingList(ingredient: Ingredient[]) {
     ingredient.forEach(ingredient => {
       const exists = this.ingridients.some(objeto => objeto.name === ingredient.name);
       if (!exists) {
         this.ingridients.push(ingredient);
+        alert(`Ingredientes añadidos satisfactoriamente`);
+      } else {
+        alert(`ya existe!!!!!!!!!!!!`);
       }
     });
     this.ingredientesChanged.emit(this.ingridients.slice());

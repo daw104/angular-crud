@@ -22,11 +22,9 @@ export class RecipeDetailComponent implements OnInit {
 
 
   addIngredientsToShoppingList() {
-    //implementar el add ahora en el servicio
     const ingredients: any = Object.values(this.selectedIngredients).map((item: any) => item.ingredient);
     try {
-      this._shoppingListService.addIngredients(ingredients);
-      alert(`Ingredientes ${JSON.stringify(ingredients)} añadida dos satisfactoriamente`);
+      this._shoppingListService.addIngredientsToShoppingList(ingredients);
     } catch (error) {
       alert(`ha ocurrido un error al agregar los ingredientes ${JSON.stringify(ingredients)}, error: ${error}`);
     }
