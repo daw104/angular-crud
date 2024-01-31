@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AccountService} from "../../services/account.service";
 import {LoginService} from "../../services/login.service";
 
 @Component({
@@ -10,10 +11,10 @@ import {LoginService} from "../../services/login.service";
 export class AccountComponent implements OnInit {
   @Input() account: { name: string, status: string };
   @Input() id: number;
-  @Output() statusChanged = new EventEmitter<{ id: number, newStatus: string }>();
 
   constructor(
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    private _accountService: AccountService
   ) {
   }
 
@@ -21,7 +22,8 @@ export class AccountComponent implements OnInit {
   }
 
   public onSetTo(status: string) {
-    this.statusChanged.emit({id: this.id, newStatus: status});
+    this._accountService.updateStatus(this.id, status);
     this._loginService.logStatusChange(status);
+    this._accountService.statusUpdated.emit(status);
   }
 }
