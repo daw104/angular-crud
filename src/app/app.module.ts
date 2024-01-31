@@ -12,6 +12,8 @@ import {RecipeItemComponent} from './recipes/recipe-list/recipe-item/recipe-item
 import {ShoppingListComponent} from './shopping-list/shopping-list.component';
 import {ShoppingEditComponent} from './shopping-list/shopping-edit/shopping-edit.component';
 import {GalleryComponent} from './gallery/gallery.component';
+import {AccountComponent} from "./user/account/account.component";
+import {NewAccountComponent} from "./user/new-account/new-account.component";
 import {UserComponent} from './user/user.component';
 import {UserListComponent} from './user/user-list/user-list.component';
 
@@ -27,7 +29,9 @@ import {UserListComponent} from './user/user-list/user-list.component';
     ShoppingEditComponent,
     GalleryComponent,
     UserComponent,
-    UserListComponent
+    UserListComponent,
+    AccountComponent,
+    NewAccountComponent
   ],
   imports: [
     BrowserModule,

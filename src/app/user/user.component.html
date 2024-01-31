@@ -1,9 +1,19 @@
 <p>Componente usuarios</p>
 <h4>Creacion de usuarios</h4>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <label>User Name</label>
     <input type="text" [(ngModel)]="newUser" required>
     <button (click)="onAddUser()">Add user</button>
+  </div>
+  <div class="col-md-6">
+    <app-new-account (accountAdded)="onAccounAdded($event)"></app-new-account>
+    <hr>
+    <app-account
+      *ngFor="let acc of accounts; let i = index"
+      [account]="acc"
+      [id]="i"
+      (statusChanged)="onStatusChanged($event)">
+    </app-account>
   </div>
 </div>
