@@ -31,20 +31,8 @@ export class RecipeListComponent implements OnInit {
   }
 
   createRecipe() {
-    // Verificar si hay un id en la URL
-    const currentUrl = this._router.url;
-    if (currentUrl.includes('/recipes/') && currentUrl.split('/').length === 3) {
-      console.log('NO hay id en la ruta'); //se CREA
-      this._router.navigate([currentUrl, 'create'])
-    } else {
-      const url = currentUrl.split('/');
-      url.pop();
-      console.log(url)
-      console.log('SI hay id en la ruta') //se LIMPIA LA URL
-      this._router.navigate([url, 'create'])
-    }
-
-
+    this._router.navigate(['recipes', 'list', 'create']);
   }
+
 
 }
