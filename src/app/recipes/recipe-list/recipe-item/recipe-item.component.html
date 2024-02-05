@@ -1,6 +1,7 @@
 <p>recipe-item works!</p>
-<a href="#" (click)="onSelectRecipe()"
-   class="list-group-item clearfix">
+<a [routerLink]="['/recipes/list', recipeInput.id]"
+   class="list-group-item clearfix"
+   style="cursor: pointer">
   <div class="pull-left">
     <h4 class="list-group-item-heading">{{ recipeInput.name }}</h4>
     <p>{{ recipeInput.description }}</p>

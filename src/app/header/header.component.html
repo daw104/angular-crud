@@ -7,20 +7,20 @@
   <div class="collapse navbar-collapse" id="navbarNav">
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" (click)="onSelectClick('recipe')">Recipe Book</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/recipes">Recipe Book</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" (click)="onSelectClick('shopping')">Shopping List</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/shopping-list">Shopping List</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" (click)="onSelectClick('gallery')">Gallery</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/gallery">Gallery</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" (click)="onSelectClick('user')">User</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/users">User</a>
       </li>
     </ul>
 

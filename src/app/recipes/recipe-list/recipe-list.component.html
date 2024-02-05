@@ -1,16 +1,26 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-success">Add new recipe</button>
-    </div>
+  <div class="col-xs-12">
+    <button class="btn btn-success"
+            (click)="createRecipe()">
+      Add new recipe
+    </button>
   </div>
   <hr>
   <div class="row">
-    <div class="col-xs-12">
-      <app-recipe-item *ngFor="let recipeElement of recipes"
-                       [recipeInput]="recipeElement">
-      </app-recipe-item>
+    <div class="col-6 border">
+      <div class="col-xs-12">
+        <app-recipe-item *ngFor="let recipeElement of recipes"
+                         [recipeInput]="recipeElement">
+        </app-recipe-item>
+      </div>
+
+    </div>
+    <div class="col-6 border-1">
+      <router-outlet></router-outlet>
     </div>
   </div>
+
+
 </div>
+
 
