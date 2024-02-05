@@ -12,11 +12,7 @@ import {UserComponent} from "./user/user.component";
 
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/recipes',
-    pathMatch: 'full'
-  },
+
   {
     path: 'recipes',
     component: RecipesComponent,

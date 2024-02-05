@@ -1,11 +1,12 @@
 import {EventEmitter, Injectable} from '@angular/core';
+import {Subject} from "rxjs";
 import {Ingredient} from "../../model/Ingredient";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingListService {
-  ingredientesChanged = new EventEmitter<Ingredient[]>();
+  ingredientesChanged = new Subject<Ingredient[]>();
   ingridients: Ingredient[] = [];
 
   constructor() {
@@ -18,7 +19,7 @@ export class ShoppingListService {
   //que maneje la lista de ingredientes, que añada los ingredientes
   addIngredient(ingredient: Ingredient) {
     this.ingridients.push(ingredient);
-    this.ingredientesChanged.emit(this.ingridients.slice());
+    this.ingredientesChanged.next(this.ingridients.slice());
   }
 
   addIngredientsToShoppingList(ingredient: Ingredient[]) {
@@ -31,6 +32,6 @@ export class ShoppingListService {
         alert(`ya existe!!!!!!!!!!!!`);
       }
     });
-    this.ingredientesChanged.emit(this.ingridients.slice());
+    this.ingredientesChanged.next(this.ingridients.slice());
   }
 }

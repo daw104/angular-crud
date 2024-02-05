@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Recipe} from "../../model/Recipe";
 import {RecipesService} from "../services/recipes.service";
 
@@ -17,15 +17,15 @@ export class RecipesComponent implements OnInit {
   }
 
   ngOnInit() {
+    //  this.selectRecipe();
+  }
+
+  selectRecipe() {
     this._recipeService.recipeSelected.subscribe(
       (recipe: Recipe) => {
         this.selectedRecipe = recipe;
       }
     )
-  }
-
-  selectByRecipe(event: any) {
-    this.selectedRecipe = event;
   }
 
 }
