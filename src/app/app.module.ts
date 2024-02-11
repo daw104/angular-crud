@@ -1,6 +1,6 @@
 import {NgOptimizedImage} from "@angular/common";
 import {NgModule} from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from "@angular/router";
 
@@ -19,7 +19,7 @@ import {NewAccountComponent} from "./user/new-account/new-account.component";
 import {UserComponent} from './user/user.component';
 import {UserListComponent} from './user/user-list/user-list.component';
 import {AppRoutingModule} from './app-routing.module';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     NgOptimizedImage,
     FormsModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [ShoppingListService],
   bootstrap: [AppComponent]
