@@ -6,7 +6,8 @@ import {Ingredient} from "../../model/Ingredient";
   providedIn: 'root'
 })
 export class ShoppingListService {
-  ingredientesChanged = new Subject<Ingredient[]>();
+  private _ingredientesChanged = new Subject<Ingredient[]>();
+  ingredientesChanged$ = this._ingredientesChanged.asObservable();
   ingridients: Ingredient[] = [];
 
   constructor() {
@@ -19,7 +20,7 @@ export class ShoppingListService {
   //que maneje la lista de ingredientes, que añada los ingredientes
   addIngredient(ingredient: Ingredient) {
     this.ingridients.push(ingredient);
-    this.ingredientesChanged.next(this.ingridients.slice());
+    this._ingredientesChanged.next(this.ingridients.slice());
   }
 
   addIngredientsToShoppingList(ingredient: Ingredient[]) {
@@ -32,6 +33,6 @@ export class ShoppingListService {
         alert(`ya existe!!!!!!!!!!!!`);
       }
     });
-    this.ingredientesChanged.next(this.ingridients.slice());
+    this._ingredientesChanged.next(this.ingridients.slice());
   }
 }

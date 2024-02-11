@@ -23,7 +23,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   public getIngredientes() {
     this.ingridients = this._shoppingListService.getIngredientes();
-    this._ingridientsChangedSubcription = this._shoppingListService.ingredientesChanged.subscribe(
+    this._ingridientsChangedSubcription = this._shoppingListService.ingredientesChanged$.subscribe(
       (ingredient: Ingredient[]) => this.ingridients = ingredient
     );
   }
