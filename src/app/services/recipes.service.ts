@@ -41,4 +41,19 @@ export class RecipesService {
     return recipeById;
   }
 
+  createRecipe(newRecipe: Recipe) {
+    this._recipes.push(newRecipe);
+    console.log(this._recipes);
+  }
+
+  updateRecipeById(recipeId: number, updatedRecipe: Recipe) {
+    const index = this._recipes.findIndex(recipe => recipe.id === recipeId);
+    if (index !== -1) {
+      this._recipes[index] = updatedRecipe;
+      alert('Receta actualizada con exito');
+    } else {
+      alert('No se ha encontrado la receta');
+    }
+  }
+
 }

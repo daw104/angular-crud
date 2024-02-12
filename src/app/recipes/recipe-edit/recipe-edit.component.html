@@ -1,1 +1,76 @@
-<p>recipe-edit works!</p>
+<h6 class="text-center"> {{ editMode ? 'Edit recipe' : 'Create a new recipe' }} </h6>
+<div class="row">
+  <form [formGroup]="createRecipeForm"
+        (ngSubmit)="onSubmitRecipeForm()">
+    <div class="row">
+      <div class="col">
+        <input type="number"
+               class="form-control visually-hidden"
+               placeholder="id"
+               formControlName="id">
+
+        <input type="text"
+               class="form-control"
+               placeholder="Name"
+               formControlName="name">
+      </div>
+      <div class="col">
+        <input type="text"
+               class="form-control"
+               placeholder="Image URL"
+               formControlName="imagePath">
+      </div>
+    </div>
+    <div class="row pt-4">
+      <div class="col-12">
+           <textarea
+             class="form-control"
+             name="description"
+             placeholder="Description"
+             rows="6"
+             formControlName="description">
+          </textarea>
+      </div>
+    </div>
+
+    <label class="text-center pt-4">Ingredients:</label>
+    <!-- el padre -->
+    <div class="row pt-4"
+         formArrayName="ingredients"
+         *ngFor="let ingredientCtrl of ingredients.controls; let i = index"
+    >
+      <!-- Cada formulario -->
+      <div class="row" [formGroupName]="i">
+        <div class="col-6">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Name"
+                 formControlName="name">
+        </div>
+        <div class="col-4">
+          <input type="number"
+                 class="form-control"
+                 placeholder="Amount"
+                 formControlName="amount">
+        </div>
+        <div class="col-2">
+          <button class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+        </div>
+      </div>
+      <!-- / cada formulario -->
+    </div>
+    <!-- el padre -->
+    <div class="col-2 text-center">
+      <button type="button" class="add-course-btn" (click)="onAddIngredient()">Add ingredient</button>
+    </div>
+
+    <div class="row pt-4 text-center">
+      <div class="col-4">
+        <button type="submit" class="btn btn-success">Add recipe</button>
+      </div>
+      <div class="col-4">
+        <button type="submit" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>
