@@ -13,6 +13,8 @@ import {RecipesService} from "../../services/recipes.service";
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
   private _recipeChangedSubcription: Subscription;
+  selectedRecipe: Recipe | null = null;
+
 
   constructor(
     private _recipeService: RecipesService,
@@ -26,7 +28,9 @@ export class RecipeListComponent implements OnInit {
 
   public getRecipes() {
     this._recipeChangedSubcription = this._recipeService.recipesChanged$.subscribe(
-      (recipe: Recipe[]) => this.recipes = recipe,
+      (recipe: Recipe[]) => {
+        this.recipes = recipe
+      },
     );
     console.log('RECIPES', this.recipes);
   }
@@ -35,5 +39,9 @@ export class RecipeListComponent implements OnInit {
     this._router.navigate(['recipes', 'list', 'create']);
   }
 
+  selectRecipe(recipe: Recipe) {
+    this.selectedRecipe = recipe;
+    console.log(this.selectedRecipe);
+  }
 
 }

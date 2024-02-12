@@ -1,12 +1,13 @@
-<p>recipe-item works!</p>
-<a [routerLink]="['/recipes/list', recipeInput.id]"
-   class="list-group-item clearfix"
-   style="cursor: pointer">
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{ recipeInput.name }}</h4>
-    <p>{{ recipeInput.description }}</p>
-    <span class="pull-right">
+<div class="container border pt-4 pb-4">
+  <a [routerLink]="['/recipes/list', recipeInput.id]"
+     class="list-group-item clearfix"
+     style="cursor: pointer">
+    <div class="pull-left">
+      <h4 class="list-group-item-heading">{{ recipeInput.name | uppercase }}</h4>
+      <p>{{ recipeInput.description }}</p>
+      <span class="pull-right">
               <img src="{{recipeInput.imagePath}}" alt="" class="img-responsive" style="max-height: 50px">
           </span>
-  </div>
-</a>
+    </div>
+  </a>
+</div>
