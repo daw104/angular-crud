@@ -10,6 +10,7 @@ import {RecipesComponent} from './recipes/recipes.component';
 import {RecipeListComponent} from './recipes/recipe-list/recipe-list.component';
 import {RecipeDetailComponent} from './recipes/recipe-detail/recipe-detail.component';
 import {RecipeItemComponent} from './recipes/recipe-list/recipe-item/recipe-item.component';
+import {RecipesService} from "./services/recipes.service";
 import {ShoppingListService} from "./services/shopping-list.service";
 import {ShoppingListComponent} from './shopping-list/shopping-list.component';
 import {ShoppingEditComponent} from './shopping-list/shopping-edit/shopping-edit.component';
@@ -46,7 +47,7 @@ import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
     RouterModule,
     ReactiveFormsModule
   ],
-  providers: [ShoppingListService],
+  providers: [ShoppingListService, RecipesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

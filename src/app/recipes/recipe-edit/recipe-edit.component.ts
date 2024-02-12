@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from "@angular/forms";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Recipe} from "../../../model/Recipe";
 import {RecipesService} from "../../services/recipes.service";
 
@@ -18,7 +18,8 @@ export class RecipeEditComponent implements OnInit {
 
   constructor(
     private _activatedRouter: ActivatedRoute,
-    private _recipeService: RecipesService
+    private _recipeService: RecipesService,
+    private _router: Router
   ) {
   }
 
@@ -27,8 +28,9 @@ export class RecipeEditComponent implements OnInit {
   }
 
   initFormRecipe() {
+    const randomId = this.createRandomId();
     this.createRecipeForm = new FormGroup({
-      'id': new FormControl(),
+      'id': new FormControl(Number(randomId)),
       'name': new FormControl(),
       'imagePath': new FormControl(),
       'description': new FormControl(),
@@ -36,16 +38,32 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
+  createRandomId() {
+    const idLength = 2;
+    let randomId = '';
+    for (let i = 0; i < idLength; i++) {
+      randomId += Math.floor(Math.random() * 10); // Números del 0 al 9
+    }
+    return randomId;
+  }
+
   onSubmitRecipeForm() {
     console.log(this.createRecipeForm.value);
     this.recipe = this.createRecipeForm.value;
     if (this.editMode) {
       this._recipeService.updateRecipeById(Number(this.recipe.id), this.recipe);
+      this.createRecipeForm.reset();
+      this._router.navigate(['recipes', 'list', Number(this.recipe.id)]);
     } else {
       this._recipeService.createRecipe(this.recipe);
+      this.createRecipeForm.reset();
+      this._router.navigate(['recipes', 'list']);
     }
   }
 
+  onCancelForm(recipeId: number) {
+    this._router.navigate(['recipes', 'list', recipeId]);
+  }
 
   listenOnEditRecipes() {
     if (this.editMode) {

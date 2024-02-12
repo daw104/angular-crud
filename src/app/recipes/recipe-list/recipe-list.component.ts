@@ -12,11 +12,10 @@ import {RecipesService} from "../../services/recipes.service";
 })
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
-  paramsSubcription: Subscription;
+  private _recipeChangedSubcription: Subscription;
 
   constructor(
     private _recipeService: RecipesService,
-    private _activatedRouter: ActivatedRoute,
     private _router: Router
   ) {
   }
@@ -26,8 +25,10 @@ export class RecipeListComponent implements OnInit {
   }
 
   public getRecipes() {
-    const recipes = this._recipeService.getRecipes();
-    this.recipes = recipes;
+    this._recipeChangedSubcription = this._recipeService.recipesChanged$.subscribe(
+      (recipe: Recipe[]) => this.recipes = recipe,
+    );
+    console.log('RECIPES', this.recipes);
   }
 
   createRecipe() {

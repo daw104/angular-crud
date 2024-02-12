@@ -15,6 +15,7 @@ export class RecipeDetailComponent implements OnInit {
   recipeDetail: Recipe;
   selectedIngredients: any = {};
   paramsSubcription: Subscription;
+  recipeId!: number;
 
   constructor(
     private _shoppingListService: ShoppingListService,
@@ -31,8 +32,8 @@ export class RecipeDetailComponent implements OnInit {
   getRecipeById() {
     this.paramsSubcription = this._activatedRoute.params.subscribe(
       (params: Params) => {
-        const recipeId = params['id']
-        this.recipeDetail = this._recipeService.getRecipeBy(Number(recipeId));
+        this.recipeId = params['id']
+        this.recipeDetail = this._recipeService.getRecipeBy(Number(this.recipeId));
       }
     );
     console.log(this.recipeDetail)
@@ -68,8 +69,11 @@ export class RecipeDetailComponent implements OnInit {
 
   editRecipe() {
     this._router.navigate(['edit'], {relativeTo: this._activatedRoute})
-
   }
 
+  deleteRecipe() {
+    this._recipeService.deleteRecipeById(this.recipeId);
+    this._router.navigate(['recipes', 'list']);
+  }
 
 }

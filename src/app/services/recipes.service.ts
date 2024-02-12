@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {Ingredient} from "../../model/Ingredient";
 import {Recipe} from "../../model/Recipe";
 
@@ -24,6 +24,8 @@ export class RecipesService {
       ])
   ];
   recipeSelected = new Subject<Recipe>();
+  private _recipesChanged = new BehaviorSubject<any[]>(this._recipes);
+  recipesChanged$ = this._recipesChanged.asObservable();
 
   constructor() {
   }
@@ -44,16 +46,28 @@ export class RecipesService {
   createRecipe(newRecipe: Recipe) {
     this._recipes.push(newRecipe);
     console.log(this._recipes);
+    this._emitRecipesChanged();
   }
 
   updateRecipeById(recipeId: number, updatedRecipe: Recipe) {
     const index = this._recipes.findIndex(recipe => recipe.id === recipeId);
     if (index !== -1) {
       this._recipes[index] = updatedRecipe;
+      this._emitRecipesChanged();
       alert('Receta actualizada con exito');
     } else {
       alert('No se ha encontrado la receta');
     }
+  }
+
+  deleteRecipeById(recipeId: number) {
+    this._recipes.splice(recipeId, 1);
+    this._emitRecipesChanged();
+    console.log(this._recipes);
+  }
+
+  private _emitRecipesChanged() {
+    this._recipesChanged.next(this._recipes.slice());
   }
 
 }
