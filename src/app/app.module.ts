@@ -21,6 +21,7 @@ import {UserComponent} from './user/user.component';
 import {UserListComponent} from './user/user-list/user-list.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
     UserListComponent,
     AccountComponent,
     NewAccountComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

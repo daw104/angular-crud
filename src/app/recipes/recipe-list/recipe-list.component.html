@@ -9,8 +9,9 @@
   <div class="row pt-4">
     <div class="col-6 border pt-4 text-center">
       <p class="fw-bold">This is the recipe list:</p>
+      <input type="text" [(ngModel)]="recipeName" placeholder="Search by name:">
       <div class="col-xs-12">
-        <app-recipe-item *ngFor="let recipeElement of recipes"
+        <app-recipe-item *ngFor="let recipeElement of recipes | filter:recipeName:'name'"
                          [recipeInput]="recipeElement"
                          (click)="selectRecipe(recipeElement)">
         </app-recipe-item>

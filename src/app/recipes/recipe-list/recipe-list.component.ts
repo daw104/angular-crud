@@ -14,7 +14,7 @@ export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
   private _recipeChangedSubcription: Subscription;
   selectedRecipe: Recipe | null = null;
-
+  recipeName: string = '';
 
   constructor(
     private _recipeService: RecipesService,
