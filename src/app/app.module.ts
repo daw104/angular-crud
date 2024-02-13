@@ -1,4 +1,5 @@
 import {NgOptimizedImage} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from '@angular/platform-browser';
@@ -21,7 +22,7 @@ import {UserListComponent} from './user/user-list/user-list.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import {FilterPipe} from './pipes/filter.pipe';
-import { CrateUsersComponent } from './user/crate-users/crate-users.component';
+import {CrateUsersComponent} from './user/crate-users/crate-users.component';
 
 @NgModule({
   declarations: [
@@ -47,9 +48,10 @@ import { CrateUsersComponent } from './user/crate-users/crate-users.component';
     FormsModule,
     AppRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [ShoppingListService, RecipesService],
+  providers: [ShoppingListService, RecipesService,],
   bootstrap: [AppComponent]
 })
 export class AppModule {
