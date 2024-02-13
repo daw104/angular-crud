@@ -3,7 +3,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from "@angular/router";
+import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
 import {TableModule} from "primeng/table";
 
 import {AppComponent} from './app.component';
@@ -24,6 +26,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import {FilterPipe} from './pipes/filter.pipe';
 import {CrateUsersComponent} from './user/crate-users/crate-users.component';
+import {UpdateUserModalComponent} from './user/update-user-modal/update-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import {CrateUsersComponent} from './user/crate-users/crate-users.component';
     AccountComponent,
     RecipeEditComponent,
     FilterPipe,
-    CrateUsersComponent
+    CrateUsersComponent,
+    UpdateUserModalComponent
   ],
   imports: [
     BrowserModule,
@@ -51,9 +55,11 @@ import {CrateUsersComponent} from './user/crate-users/crate-users.component';
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
-    TableModule
+    TableModule,
+    DynamicDialogModule,
+    BrowserAnimationsModule
   ],
-  providers: [ShoppingListService, RecipesService,],
+  providers: [ShoppingListService, RecipesService, DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

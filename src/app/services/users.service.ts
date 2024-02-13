@@ -32,5 +32,16 @@ export class UsersService {
       );
   }
 
+  deleteUser(userId: string) {
+    return this._http.delete(`https://angular-http-test-9940c-default-rtdb.firebaseio.com/users/${userId}.json`);
+  }
+
+  getUserById(userId: string): Observable<User> {
+    return this._http.get<User>(`https://angular-http-test-9940c-default-rtdb.firebaseio.com/users/${userId}.json`);
+  }
+
+  updateUserById(userId: string, updatedUserData: User): Observable<any> {
+    return this._http.patch<any>(`https://angular-http-test-9940c-default-rtdb.firebaseio.com/users/${userId}.json`, updatedUserData);
+  }
 
 }

@@ -1,34 +1,36 @@
 <div>
   <h2>Lista de Usuarios</h2>
 
-  <div *ngIf="isLoading" class="spinner-border" role="status">
-  </div>
 
-  <ng-container *ngIf="!isLoading">
-    <div class="card">
-      <p-table [value]="users" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="caption"> Header</ng-template>
-        <ng-template pTemplate="header">
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>lastName</th>
-            <th>email</th>
-            <th>description</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-user>
-          <tr>
-            <td>{{ user?.id ? user.id : 'El campo no tiene datos' }}</td>
-            <td>{{ user.userData?.name ? user.userData?.name : 'El campo no tiene datos' }}</td>
-            <td>{{ user.userData?.lastName ? user.userData?.lastName : 'El campo no tiene datos' }}</td>
-            <td>{{ user?.email ? user?.email : 'El campo no tiene datos' }}</td>
-            <td>{{ user?.description ? user?.description : 'El campo no tiene datos' }}</td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="summary"> Footer</ng-template>
-      </p-table>
-    </div>
-  </ng-container>
+  <div class="card">
+    <p-table [loading]="isLoading" [value]="users" styleClass="p-datatable-gridlines"
+             [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="caption"> Header</ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>lastName</th>
+          <th>email</th>
+          <th>description</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td (click)="openUpdateModal(user.id)"
+              style="cursor : pointer">{{ user?.id ? user.id : 'El campo no tiene datos' }}
+          </td>
+          <td>{{ user.userData?.name ? user.userData?.name : 'El campo no tiene datos' }}</td>
+          <td>{{ user.userData?.lastName ? user.userData?.lastName : 'El campo no tiene datos' }}</td>
+          <td>{{ user?.email ? user?.email : 'El campo no tiene datos' }}</td>
+          <td>{{ user?.description ? user?.description : 'El campo no tiene datos' }}</td>
+          <td (click)="onDeleteUser(user.id)" style="cursor : pointer">
+            Eliminar
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary"> Footer</ng-template>
+    </p-table>
+  </div>
 
 </div>

@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {DialogService} from "primeng/dynamicdialog";
 import {User} from "../../../model/User";
 import {UsersService} from "../../services/users.service";
+import {UpdateUserModalComponent} from "../update-user-modal/update-user-modal.component";
 
 @Component({
   selector: 'app-user-list',
@@ -9,15 +11,16 @@ import {UsersService} from "../../services/users.service";
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
-  userChangedSubscription = this._userService.usersChanged$.subscribe(
+  userChangedSubscription = this._usersService.usersChanged$.subscribe(
     users => {
       this.getUsers()
     }
   );
-  isLoading!: boolean;
+  isLoading: boolean;
 
   constructor(
-    private _userService: UsersService
+    private _usersService: UsersService,
+    public dialogService: DialogService
   ) {
   }
 
@@ -28,7 +31,7 @@ export class UserListComponent implements OnInit {
 
   getUsers() {
     this.isLoading = true;
-    this._userService.getAllUsers().subscribe(
+    this._usersService.getAllUsers().subscribe(
       users => {
         this.users = users;
         console.log(this.users);
@@ -38,5 +41,34 @@ export class UserListComponent implements OnInit {
       }
     );
   }
+
+  onDeleteUser(userId: string) {
+    console.log('userId: ', userId);
+    this._usersService.deleteUser(userId).subscribe({
+      next: (response) => {
+        this._usersService.usersChanged.next();
+      },
+      error: (error) => {
+      }
+    });
+  }
+
+  openUpdateModal(userId: string) {
+
+    this.dialogService.open(UpdateUserModalComponent, {
+      data: {
+        userId
+      },
+      header: 'Select a Product',
+      width: '70%',
+      contentStyle: {overflow: 'auto'},
+      baseZIndex: 10000,
+      maximizable: true,
+    }).onClose.subscribe(() => {
+      this._usersService.usersChanged.next();
+    });
+
+  }
+
 
 }

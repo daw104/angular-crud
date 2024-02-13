@@ -1,0 +1,46 @@
+<form
+  [formGroup]="updateUserForm"
+  (ngSubmit)="onUpdateUser()">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text"
+           class="form-control"
+           id="name"
+           placeholder="Enter a name"
+           formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email"
+           class="form-control"
+           id="email"
+           aria-describedby="emailHelp"
+           placeholder="Enter email"
+           formControlName="email">
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input type="text"
+           class="form-control"
+           id="lastName"
+           placeholder="lastName"
+           formControlName="lastName">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control"
+              id="description"
+              placeholder="Description"
+              formControlName="description"> </textarea>
+  </div>
+  <div class="pt-4">
+    <button type="submit"
+            class="btn btn-success mg-4">
+      <span>Update</span>
+    </button>
+    <button type="button"
+            class="btn btn-danger mg-4">
+      Cancel
+    </button>
+  </div>
+</form>
