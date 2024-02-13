@@ -16,12 +16,12 @@ import {ShoppingListComponent} from './shopping-list/shopping-list.component';
 import {ShoppingEditComponent} from './shopping-list/shopping-edit/shopping-edit.component';
 import {GalleryComponent} from './gallery/gallery.component';
 import {AccountComponent} from "./user/account/account.component";
-import {NewAccountComponent} from "./user/new-account/new-account.component";
 import {UserComponent} from './user/user.component';
 import {UserListComponent} from './user/user-list/user-list.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
-import { FilterPipe } from './pipes/filter.pipe';
+import {FilterPipe} from './pipes/filter.pipe';
+import { CrateUsersComponent } from './user/crate-users/crate-users.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +37,9 @@ import { FilterPipe } from './pipes/filter.pipe';
     UserComponent,
     UserListComponent,
     AccountComponent,
-    NewAccountComponent,
     RecipeEditComponent,
-    FilterPipe
+    FilterPipe,
+    CrateUsersComponent
   ],
   imports: [
     BrowserModule,
