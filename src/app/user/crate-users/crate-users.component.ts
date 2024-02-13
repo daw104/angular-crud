@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {Subject} from "rxjs";
 import {User} from "../../../model/User";
 import {UsersService} from "../../services/users.service";
 
@@ -11,6 +12,7 @@ import {UsersService} from "../../services/users.service";
 export class CrateUsersComponent implements OnInit {
   user!: User;
   createUserForm: FormGroup;
+  isLoading!: boolean;
 
   constructor(
     private _usersService: UsersService
@@ -31,7 +33,7 @@ export class CrateUsersComponent implements OnInit {
   }
 
   onCreateUser() {
-    console.log(this.createUserForm.value);
+    this.isLoading = true;
     const userBody: User = {
       userData: {
         name: this.createUserForm.value.name,
@@ -40,9 +42,19 @@ export class CrateUsersComponent implements OnInit {
       email: this.createUserForm.value.email,
       description: this.createUserForm.value.description,
     };
-    console.log(userBody);
-    this._usersService.createUser(userBody);
+    this._usersService.createUser(userBody).subscribe({
+      next: (response) => {
+        this.createUserForm.reset();
+        this._usersService.usersChanged.next();
+        this.isLoading = false;
+      },
+      error: (error) => {
+      }
+    });
   }
 
+  onCanelForm() {
+    this.createUserForm.reset();
+  }
 
 }

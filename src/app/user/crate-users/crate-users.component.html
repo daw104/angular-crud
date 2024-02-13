@@ -35,8 +35,16 @@
   </div>
   <div class="pt-4">
     <button type="submit"
-            class="btn btn-success mg-4"
-    >Save
+            class="btn btn-success mg-4">
+      <span *ngIf="isLoading"
+            class="spinner-border spinner-border-sm"
+            role="status" aria-hidden="true"></span>
+      <span *ngIf="!isLoading">Save</span>
+    </button>
+    <button type="button"
+            class="btn btn-danger mg-4"
+            (click)="onCanelForm()">
+      Cancel
     </button>
   </div>
 </form>

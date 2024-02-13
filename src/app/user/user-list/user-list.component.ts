@@ -9,6 +9,12 @@ import {UsersService} from "../../services/users.service";
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
+  userChangedSubscription = this._userService.usersChanged$.subscribe(
+    users => {
+      this.getUsers()
+    }
+  );
+  isLoading!: boolean;
 
   constructor(
     private _userService: UsersService
@@ -19,13 +25,15 @@ export class UserListComponent implements OnInit {
     this.getUsers();
   }
 
+
   getUsers() {
+    this.isLoading = true;
     this._userService.getAllUsers().subscribe(
       users => {
         this.users = users;
         console.log(this.users);
-      },
-      error => {
+        this.isLoading = false;
+      }, error => {
         alert('error al obtener los datos');
       }
     );

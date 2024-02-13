@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from "@angular/router";
+import {TableModule} from "primeng/table";
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -49,7 +50,8 @@ import {CrateUsersComponent} from './user/crate-users/crate-users.component';
     AppRoutingModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TableModule
   ],
   providers: [ShoppingListService, RecipesService,],
   bootstrap: [AppComponent]
