@@ -79,8 +79,6 @@ export class UserListComponent implements OnInit {
       acceptLabel: 'Si',
       rejectLabel: 'No'
     });
-
-
   }
 
   openUpdateModal(userId: string) {
