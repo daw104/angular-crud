@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable, Subject} from "rxjs";
 import {map} from "rxjs/operators";
@@ -19,12 +19,23 @@ export class UsersService {
   createUser(userBody: User) {
     return this._http.post<{ name: string }>(
       'https://angular-http-test-9940c-default-rtdb.firebaseio.com/users.json',
-      userBody
+      userBody,
+      {
+        headers: new HttpHeaders({'Custom-header': 'headerCustom'}),
+      }
     );
   }
 
   getAllUsers(): Observable<User[]> {
-    return this._http.get('https://angular-http-test-9940c-default-rtdb.firebaseio.com/users.json')
+    let searchParams = new HttpParams();
+    searchParams = searchParams.append('print', 'pretty');
+    searchParams = searchParams.append('custom', 'key'); //de esta manera concatenamos query params y mantenemos el anterior
+    return this._http.get(
+      'https://angular-http-test-9940c-default-rtdb.firebaseio.com/users.json',
+      {
+        params: searchParams
+      }
+    )
       .pipe(
         map((responseData: { [key: string]: User }) => {
           return Object.keys(responseData).map(key => ({...responseData[key], id: key}));
