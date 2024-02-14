@@ -9,6 +9,9 @@
            id="name"
            placeholder="Enter a name"
            formControlName="name">
+    <span class="help-block"
+          *ngIf="!createUserForm.get('name').valid && createUserForm.get('name').touched">
+            The name is mandatory</span>
   </div>
   <div class="form-group">
     <label for="email">Email address</label>
@@ -17,7 +20,17 @@
            id="email"
            aria-describedby="emailHelp"
            placeholder="Enter email"
-           formControlName="email">
+           formControlName="email"
+           email>
+    <span class="help-block"
+          *ngIf="!createUserForm.get('email').valid && createUserForm.get('email').touched">
+        <span *ngIf="createUserForm.get('email').errors?.email">
+            The email format is invalid
+        </span>
+        <span *ngIf="!createUserForm.get('email').errors?.email">
+            The email is mandatory
+        </span>
+  </span>
   </div>
   <div class="form-group">
     <label for="lastName">Last Name</label>
@@ -26,6 +39,12 @@
            id="lastName"
            placeholder="lastName"
            formControlName="lastName">
+    <span class="help-block"
+          *ngIf="!createUserForm.get('lastName').valid && createUserForm.get('lastName').touched">
+        <span *ngIf="!createUserForm.get('lastName').errors?.lastName">
+            The lastName is mandatory
+        </span>
+  </span>
   </div>
   <div class="form-group">
     <label for="description">Description</label>
@@ -35,13 +54,16 @@
               formControlName="description"> </textarea>
   </div>
   <div class="pt-4 d-flex justify-content-center">
-    <button type="submit" class="btn btn-success mg-4 mx-2">
+    <button type="submit"
+            [disabled]="!createUserForm.valid"
+            class="btn btn-success mg-4 mx-2">
       <span *ngIf="isLoading"
             class="spinner-border spinner-border-sm"
             role="status"
             aria-hidden="true">
       </span>
-      <span *ngIf="!isLoading">Save</span>
+      <span *ngIf="!isLoading">
+        Save</span>
     </button>
     <button type="button" class="btn btn-danger mg-4 mx-2" (click)="onCanelForm()">Cancel</button>
   </div>

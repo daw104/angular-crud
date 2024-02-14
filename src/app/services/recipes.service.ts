@@ -1,3 +1,4 @@
+import {HttpClient} from "@angular/common/http";
 import {EventEmitter, Injectable} from '@angular/core';
 import {BehaviorSubject, Subject} from "rxjs";
 import {Ingredient} from "../../model/Ingredient";

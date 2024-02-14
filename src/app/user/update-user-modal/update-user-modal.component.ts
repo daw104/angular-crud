@@ -63,4 +63,8 @@ export class UpdateUserModalComponent implements OnInit {
     });
   }
 
+  onCloseModal() {
+    this._dynamicDialogRef.close(true);
+  }
+
 }

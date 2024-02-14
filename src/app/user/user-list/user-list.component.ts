@@ -86,7 +86,6 @@ export class UserListComponent implements OnInit {
       data: {
         userId
       },
-      header: 'Select a Product',
       width: '70%',
       contentStyle: {overflow: 'auto'},
       baseZIndex: 10000,

@@ -1,3 +1,4 @@
+<h4 class="text-center">Editar usuario</h4>
 <form
   [formGroup]="updateUserForm"
   (ngSubmit)="onUpdateUser()">
@@ -33,14 +34,15 @@
               placeholder="Description"
               formControlName="description"> </textarea>
   </div>
-  <div class="pt-4">
+  <div class="pt-4 d-flex justify-content-center">
     <button type="submit"
-            class="btn btn-success mg-4">
+            class="btn btn-success mg-4 mx-2">
       <span>Update</span>
     </button>
     <button type="button"
-            class="btn btn-danger mg-4">
-      Cancel
+            class="btn btn-danger mg-4 mx-2"
+            (click)="onCloseModal()">
+      Close
     </button>
   </div>
 </form>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {Subject} from "rxjs";
 import {User} from "../../../model/User";
@@ -27,9 +27,9 @@ export class CrateUsersComponent implements OnInit {
 
   initCreateUserForm() {
     this.createUserForm = new FormGroup({
-      'name': new FormControl(),
-      'lastName': new FormControl(),
-      'email': new FormControl(),
+      'name': new FormControl(null, Validators.required),
+      'lastName': new FormControl(null, Validators.required),
+      'email': new FormControl(null, Validators.required),
       'description': new FormControl(),
     });
   }
