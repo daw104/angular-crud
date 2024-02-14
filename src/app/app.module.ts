@@ -30,6 +30,7 @@ import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import {FilterPipe} from './pipes/filter.pipe';
 import {CrateUsersComponent} from './user/crate-users/crate-users.component';
 import {UpdateUserModalComponent} from './user/update-user-modal/update-user-modal.component';
+import { RecipeCreateComponent } from './recipes/recipe-create/recipe-create.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {UpdateUserModalComponent} from './user/update-user-modal/update-user-mod
     RecipeEditComponent,
     FilterPipe,
     CrateUsersComponent,
-    UpdateUserModalComponent
+    UpdateUserModalComponent,
+    RecipeCreateComponent
   ],
   imports: [
     BrowserModule,

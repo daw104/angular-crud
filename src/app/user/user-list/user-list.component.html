@@ -1,7 +1,7 @@
 <div>
   <p-toast></p-toast>
   <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-  <h2>Lista de Usuarios</h2>
+  <h2 class="text-center">Lista de Usuarios</h2>
   <div class="card">
     <p-table [paginator]="true"
              [rows]="5"
@@ -11,7 +11,9 @@
              [value]="users"
              styleClass="p-datatable-gridlines"
              [tableStyle]="{ 'min-width': '50rem' }">
-      <ng-template pTemplate="caption"> Header</ng-template>
+      <ng-template pTemplate="caption">
+        Header
+      </ng-template>
       <ng-template pTemplate="header">
         <tr>
           <th>ID</th>
@@ -43,5 +45,4 @@
       </ng-template>
     </p-table>
   </div>
-
 </div>

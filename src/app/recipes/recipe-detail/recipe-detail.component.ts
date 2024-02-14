@@ -15,7 +15,7 @@ export class RecipeDetailComponent implements OnInit {
   recipeDetail: Recipe;
   selectedIngredients: any = {};
   paramsSubcription: Subscription;
-  recipeId!: number;
+  recipeId!: string;
 
   constructor(
     private _shoppingListService: ShoppingListService,
@@ -33,7 +33,7 @@ export class RecipeDetailComponent implements OnInit {
     this.paramsSubcription = this._activatedRoute.params.subscribe(
       (params: Params) => {
         this.recipeId = params['id']
-        this.recipeDetail = this._recipeService.getRecipeBy(Number(this.recipeId));
+        this.recipeDetail = this._recipeService.getRecipeBy(this.recipeId);
       }
     );
     console.log(this.recipeDetail)

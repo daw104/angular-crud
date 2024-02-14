@@ -1,0 +1,75 @@
+<h4 class="text-center">Create a recipe</h4>
+<div class="row">
+  <form [formGroup]="createRecipeForm"
+        (ngSubmit)="submitRecipeForm()">
+    <div class="row">
+      <div class="col">
+        <input type="text"
+               class="form-control"
+               placeholder="Name"
+               formControlName="name">
+      </div>
+      <div class="col">
+        <input type="text"
+               class="form-control"
+               placeholder="Image URL"
+               formControlName="imagePath">
+      </div>
+    </div>
+    <div class="row pt-4">
+      <div class="col-12">
+           <textarea
+             class="form-control"
+             name="description"
+             placeholder="Description"
+             rows="6"
+             formControlName="description">
+          </textarea>
+      </div>
+    </div>
+
+    <label class="text-center pt-4">Ingredients:</label>
+    <!-- el padre -->
+    <div class="row pt-4"
+         formArrayName="ingredients"
+         *ngFor="let ingredientCtrl of ingredients.controls; let i = index"
+    >
+      <!-- Cada formulario -->
+      <div class="row" [formGroupName]="i">
+        <div class="col-6">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Name"
+                 formControlName="name">
+        </div>
+        <div class="col-4">
+          <input type="number"
+                 class="form-control"
+                 placeholder="Amount"
+                 formControlName="amount">
+        </div>
+        <div class="col-2">
+          <p-button label="" severity="danger" (click)="onDeleteIngredient(i)">
+            <i class="pi pi-trash"></i>
+          </p-button>
+        </div>
+      </div>
+      <!-- / cada formulario -->
+    </div>
+    <!-- el padre -->
+    <div class="col-2 text-center">
+      <p-button label="" severity="secondary" (click)="onAddIngredient()">
+        <i class="pi pi-plus"></i>
+      </p-button>
+    </div>
+
+    <div class="row pt-4 text-center">
+      <div class="col-4">
+        <button type="submit" class="btn btn-success">Add recipe</button>
+      </div>
+      <div class="col-4">
+        <button type="submit" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

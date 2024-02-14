@@ -10,7 +10,7 @@ import {RecipesService} from "../../services/recipes.service";
   styleUrls: ['./recipe-edit.component.scss']
 })
 export class RecipeEditComponent implements OnInit {
-  recipeId: number;
+  recipeId: string;
   editMode = false;
   createRecipeForm!: FormGroup;
   recipeIngredientes!: any;
@@ -24,7 +24,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getRecipeId();
+    //this.getRecipeId();
   }
 
   initFormRecipe() {
@@ -51,7 +51,7 @@ export class RecipeEditComponent implements OnInit {
     console.log(this.createRecipeForm.value);
     this.recipe = this.createRecipeForm.value;
     if (this.editMode) {
-      this._recipeService.updateRecipeById(Number(this.recipe.id), this.recipe);
+      this._recipeService.updateRecipeById(this.recipe.id, this.recipe);
       this.createRecipeForm.reset();
       this._router.navigate(['recipes', 'list', Number(this.recipe.id)]);
     } else {
@@ -61,7 +61,7 @@ export class RecipeEditComponent implements OnInit {
     }
   }
 
-  onCancelForm(recipeId: number) {
+  onCancelForm(recipeId: string) {
     this._router.navigate(['recipes', 'list', recipeId]);
   }
 
@@ -109,16 +109,16 @@ export class RecipeEditComponent implements OnInit {
     console.log(this.ingredients);
   }
 
-  getRecipeId() {
-    this._activatedRouter.params.subscribe(
-      (params: Params) => {
-        this.recipeId = +params['id'];
-        this.editMode = params['id'] != null;
-        console.log(this.editMode);
-        this.initFormRecipe();
-        this.listenOnEditRecipes();
-      }
-    )
-  }
+  /*  getRecipeId() {
+      this._activatedRouter.params.subscribe(
+        (params: Params) => {
+          this.recipeId = +params['id'];
+          this.editMode = params['id'] != null;
+          console.log(this.editMode);
+          this.initFormRecipe();
+          this.listenOnEditRecipes();
+        }
+      )
+    }*/
 
 }

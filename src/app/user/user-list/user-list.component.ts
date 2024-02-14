@@ -93,7 +93,6 @@ export class UserListComponent implements OnInit {
     }).onClose.subscribe(() => {
       this._usersService.usersChanged.next();
     });
-
   }
 
 

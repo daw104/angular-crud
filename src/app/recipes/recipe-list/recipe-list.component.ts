@@ -1,9 +1,12 @@
 import {ThisReceiver} from "@angular/compiler";
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {DialogService} from "primeng/dynamicdialog";
 import {Subscription} from "rxjs";
 import {Recipe} from "../../../model/Recipe";
 import {RecipesService} from "../../services/recipes.service";
+import {UpdateUserModalComponent} from "../../user/update-user-modal/update-user-modal.component";
+import {RecipeCreateComponent} from "../recipe-create/recipe-create.component";
 
 @Component({
   selector: 'app-recipe-list',
@@ -12,13 +15,17 @@ import {RecipesService} from "../../services/recipes.service";
 })
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
-  private _recipeChangedSubcription: Subscription;
+  recipeChangedSubcription: Subscription = this._recipeService.recipesChanged$.subscribe(
+    recipes => {
+      this.getRecipes();
+    }
+  );
   selectedRecipe: Recipe | null = null;
-  recipeName: string = '';
 
   constructor(
     private _recipeService: RecipesService,
-    private _router: Router
+    private _router: Router,
+    public dialogService: DialogService,
   ) {
   }
 
@@ -27,21 +34,29 @@ export class RecipeListComponent implements OnInit {
   }
 
   public getRecipes() {
-    this._recipeChangedSubcription = this._recipeService.recipesChanged$.subscribe(
-      (recipe: Recipe[]) => {
-        this.recipes = recipe
-      },
-    );
-    console.log('RECIPES', this.recipes);
+    this._recipeService.getAllRecipes().subscribe(
+      recipes => {
+        this.recipes = recipes;
+      }, error => {
+
+      }
+    )
   }
 
-  createRecipe() {
-    this._router.navigate(['recipes', 'list', 'create']);
+  OpenCreateRecipe() {
+    this.dialogService.open(RecipeCreateComponent, {
+      width: '70%',
+      contentStyle: {overflow: 'auto'},
+      baseZIndex: 10000,
+      maximizable: true,
+    }).onClose.subscribe(() => {
+      this._recipeService.recipesChanged.next();
+    })
+
   }
 
   selectRecipe(recipe: Recipe) {
     this.selectedRecipe = recipe;
-    console.log(this.selectedRecipe);
   }
 
 }
