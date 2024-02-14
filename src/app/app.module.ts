@@ -8,6 +8,7 @@ import {RouterModule} from "@angular/router";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
+import {SplitButtonModule} from "primeng/splitbutton";
 import {TableModule} from "primeng/table";
 import {ToastModule} from "primeng/toast";
 
@@ -30,7 +31,7 @@ import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import {FilterPipe} from './pipes/filter.pipe';
 import {CrateUsersComponent} from './user/crate-users/crate-users.component';
 import {UpdateUserModalComponent} from './user/update-user-modal/update-user-modal.component';
-import { RecipeCreateComponent } from './recipes/recipe-create/recipe-create.component';
+import {RecipeCreateComponent} from './recipes/recipe-create/recipe-create.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { RecipeCreateComponent } from './recipes/recipe-create/recipe-create.com
     DynamicDialogModule,
     BrowserAnimationsModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    SplitButtonModule
   ],
   providers: [ShoppingListService, RecipesService, DialogService, MessageService, DialogService, ConfirmationService],
   bootstrap: [AppComponent]

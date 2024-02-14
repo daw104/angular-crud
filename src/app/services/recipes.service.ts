@@ -71,9 +71,7 @@ export class RecipesService {
   }
 
   deleteRecipeById(recipeId: string) {
-    this._recipes.splice(Number(recipeId), 1);
-    // this._emitRecipesChanged();
-    console.log(this._recipes);
+    return this._http.delete(`https://angular-http-test-9940c-default-rtdb.firebaseio.com/recipes/${recipeId}.json`);
   }
 
   /*  private _emitRecipesChanged() {
