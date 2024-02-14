@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {MenuItem, MessageService} from "primeng/api";
+import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {Recipe} from "../../../model/Recipe";
 import {RecipesService} from "../../services/recipes.service";
 
@@ -10,88 +11,96 @@ import {RecipesService} from "../../services/recipes.service";
   styleUrls: ['./recipe-edit.component.scss']
 })
 export class RecipeEditComponent implements OnInit {
-  recipeId: string;
-  editMode = false;
-  createRecipeForm!: FormGroup;
-  recipeIngredientes!: any;
-  recipe!: Recipe;
+  recipeId!: string
+  activeIndex: number = 0;
+  items: MenuItem[];
+  recipe: Recipe;
+  createRecipeFormStep1: FormGroup = this._fb.group({
+    name: [],
+    imagePath: [],
+    description: []
+  });
+  createRecipeFormStep2: FormGroup = this._fb.group({
+    ingredients: this._fb.array([])
+  });
 
   constructor(
-    private _activatedRouter: ActivatedRoute,
-    private _recipeService: RecipesService,
-    private _router: Router
+    private _config: DynamicDialogConfig,
+    private _fb: FormBuilder,
+    private _dynamicDialogRef: DynamicDialogRef,
+    private _recipesService: RecipesService,
+    private _messageService: MessageService
   ) {
   }
 
   ngOnInit() {
-    //this.getRecipeId();
+    this.recipeId = this._config.data.recipeId;
+    this.getItemsForStepper();
+    this.getRecipeById();
   }
 
-  initFormRecipe() {
-    const randomId = this.createRandomId();
-    this.createRecipeForm = new FormGroup({
-      'id': new FormControl(Number(randomId)),
-      'name': new FormControl(),
-      'imagePath': new FormControl(),
-      'description': new FormControl(),
-      'ingredients': new FormArray([]),
+  getRecipeById() {
+    this._recipesService.getRecipeById(this.recipeId).subscribe({
+      next: (response) => {
+        this.recipe = response;
+        this.createRecipeFormStep1.patchValue({
+          name: response.name,
+          imagePath: response.imagePath,
+          description: response.description,
+        });
+        if (this.recipe.ingredients) {
+          for (let ingredient of this.recipe.ingredients) {
+            this.ingredients.push(
+              new FormGroup({
+                'name': new FormControl(ingredient.name),
+                'amount': new FormControl(ingredient.amount)
+              }))
+          }
+        }
+      },
+      error: (error) => {
+      }
     });
   }
 
-  createRandomId() {
-    const idLength = 2;
-    let randomId = '';
-    for (let i = 0; i < idLength; i++) {
-      randomId += Math.floor(Math.random() * 10); // Números del 0 al 9
-    }
-    return randomId;
-  }
-
-  onSubmitRecipeForm() {
-    console.log(this.createRecipeForm.value);
-    this.recipe = this.createRecipeForm.value;
-    if (this.editMode) {
-      this._recipeService.updateRecipeById(this.recipe.id, this.recipe);
-      this.createRecipeForm.reset();
-      this._router.navigate(['recipes', 'list', Number(this.recipe.id)]);
-    } else {
-      this._recipeService.createRecipe(this.recipe);
-      this.createRecipeForm.reset();
-      this._router.navigate(['recipes', 'list']);
-    }
-  }
-
-  onCancelForm(recipeId: string) {
-    this._router.navigate(['recipes', 'list', recipeId]);
-  }
-
-  listenOnEditRecipes() {
-    if (this.editMode) {
-      const recipe = this._recipeService.getRecipeBy(this.recipeId);
-      this.recipeIngredientes = recipe.ingredients;
-      this.createRecipeForm.patchValue({
-        'id': recipe.id,
-        'name': recipe.name,
-        'imagePath': recipe.imagePath,
-        'description': recipe.description,
-      });
-
-      if (recipe.ingredients) {
-        for (let ingredient of recipe.ingredients) {
-          this.ingredients.push(
-            new FormGroup({
-              'name': new FormControl(ingredient.name),
-              'amount': new FormControl(ingredient.amount)
-            }))
-        }
-        console.log(this.createRecipeForm)
+  submitUpdateForm() {
+    const body = {
+      ...this.createRecipeFormStep1.value,
+      ...this.createRecipeFormStep2.value,
+    };
+    this._recipesService.updateRecipeById(this.recipeId, body).subscribe({
+      next: (response) => {
+        this._dynamicDialogRef.close(true);
+      },
+      error: (error) => {
       }
-    }
+    });
   }
 
 
-  get ingredients() { // a getter!
-    return (<FormArray>this.createRecipeForm.get('ingredients'));
+  nextStep() {
+    console.log(this.createRecipeFormStep1.valid)
+    if (this.createRecipeFormStep1.valid) {
+      this.activeIndex++;
+    }
+  }
+
+  prevStep() {
+    // Retrocede al paso anterior
+    if (this.activeIndex > 0) {
+      this.activeIndex--;
+    }
+  }
+
+  submitRecipeForm() {
+    // Envía el formulario completo
+    if (this.createRecipeFormStep2.valid) {
+      // Realiza la lógica para enviar el formulario completo
+    }
+  }
+
+  get ingredients() {
+    return (<FormArray>this.createRecipeFormStep2.get('ingredients'));
   }
 
   onDeleteIngredient(index: number) {
@@ -106,19 +115,27 @@ export class RecipeEditComponent implements OnInit {
       'amount': new FormControl('')
     });
     this.ingredients.push(newIngredient);
-    console.log(this.ingredients);
   }
 
-  /*  getRecipeId() {
-      this._activatedRouter.params.subscribe(
-        (params: Params) => {
-          this.recipeId = +params['id'];
-          this.editMode = params['id'] != null;
-          console.log(this.editMode);
-          this.initFormRecipe();
-          this.listenOnEditRecipes();
-        }
-      )
-    }*/
+  getItemsForStepper() {
+    this.items = [
+      {
+        label: 'Personal',
+        command: (event: any) => this._messageService.add({
+          severity: 'info',
+          summary: 'First Step',
+          detail: event.item.label
+        })
+      },
+      {
+        label: 'Seat',
+        command: (event: any) => this._messageService.add({
+          severity: 'info',
+          summary: 'Second Step',
+          detail: event.item.label
+        })
+      },
+    ];
+  }
 
 }

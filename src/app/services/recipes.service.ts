@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {EventEmitter, Injectable} from '@angular/core';
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {map} from "rxjs/operators";
 import {Ingredient} from "../../model/Ingredient";
 import {Recipe} from "../../model/Recipe";
@@ -44,13 +44,8 @@ export class RecipesService {
       );
   }
 
-  getRecipeBy(recipeId: string) {
-    const recipeById = this._recipes.find(
-      (recipe => {
-        return recipe.id === recipeId;
-      })
-    );
-    return recipeById;
+  getRecipeById(recipeId: string): Observable<Recipe> {
+    return this._http.get<Recipe>(`https://angular-http-test-9940c-default-rtdb.firebaseio.com/recipes/${recipeId}.json`)
   }
 
   createRecipe(recipeBody: Recipe) {
@@ -60,14 +55,7 @@ export class RecipesService {
   }
 
   updateRecipeById(recipeId: string, updatedRecipe: Recipe) {
-    const index = this._recipes.findIndex(recipe => recipe.id === recipeId);
-    if (index !== -1) {
-      this._recipes[index] = updatedRecipe;
-      //   this._emitRecipesChanged();
-      alert('Receta actualizada con exito');
-    } else {
-      alert('No se ha encontrado la receta');
-    }
+    return this._http.patch<Recipe>(`https://angular-http-test-9940c-default-rtdb.firebaseio.com/recipes/${recipeId}.json`, updatedRecipe);
   }
 
   deleteRecipeById(recipeId: string) {

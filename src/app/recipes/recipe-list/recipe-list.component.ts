@@ -8,6 +8,7 @@ import {Recipe} from "../../../model/Recipe";
 import {RecipesService} from "../../services/recipes.service";
 import {UpdateUserModalComponent} from "../../user/update-user-modal/update-user-modal.component";
 import {RecipeCreateComponent} from "../recipe-create/recipe-create.component";
+import {RecipeEditComponent} from "../recipe-edit/recipe-edit.component";
 
 @Component({
   selector: 'app-recipe-list',
@@ -79,7 +80,6 @@ export class RecipeListComponent implements OnInit {
     }).onClose.subscribe(() => {
       this._recipeService.recipesChanged.next();
     })
-
   }
 
   deleteRecipe(recipeId: string) {
@@ -107,6 +107,19 @@ export class RecipeListComponent implements OnInit {
     });
   }
 
+  openModalUpdateRecipe(recipeId: string) {
+    this.dialogService.open(RecipeEditComponent, {
+      data: {
+        recipeId
+      },
+      width: '70%',
+      contentStyle: {overflow: 'auto'},
+      baseZIndex: 10000,
+      maximizable: true,
+    }).onClose.subscribe(() => {
+      this._recipeService.recipesChanged.next();
+    })
+  }
 
   selectRecipe(recipe: Recipe) {
     this.selectedRecipe = recipe;

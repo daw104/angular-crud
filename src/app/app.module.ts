@@ -9,6 +9,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
 import {SplitButtonModule} from "primeng/splitbutton";
+import {StepsModule} from "primeng/steps";
 import {TableModule} from "primeng/table";
 import {ToastModule} from "primeng/toast";
 
@@ -27,11 +28,11 @@ import {AccountComponent} from "./user/account/account.component";
 import {UserComponent} from './user/user.component';
 import {UserListComponent} from './user/user-list/user-list.component';
 import {AppRoutingModule} from './app-routing.module';
-import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import {FilterPipe} from './pipes/filter.pipe';
 import {CrateUsersComponent} from './user/crate-users/crate-users.component';
 import {UpdateUserModalComponent} from './user/update-user-modal/update-user-modal.component';
 import {RecipeCreateComponent} from './recipes/recipe-create/recipe-create.component';
+import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -47,11 +48,11 @@ import {RecipeCreateComponent} from './recipes/recipe-create/recipe-create.compo
     UserComponent,
     UserListComponent,
     AccountComponent,
-    RecipeEditComponent,
     FilterPipe,
     CrateUsersComponent,
     UpdateUserModalComponent,
-    RecipeCreateComponent
+    RecipeCreateComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +67,8 @@ import {RecipeCreateComponent} from './recipes/recipe-create/recipe-create.compo
     BrowserAnimationsModule,
     ToastModule,
     ConfirmDialogModule,
-    SplitButtonModule
+    SplitButtonModule,
+    StepsModule
   ],
   providers: [ShoppingListService, RecipesService, DialogService, MessageService, DialogService, ConfirmationService],
   bootstrap: [AppComponent]

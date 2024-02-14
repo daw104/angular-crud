@@ -94,6 +94,5 @@ export class UserListComponent implements OnInit {
       this._usersService.usersChanged.next();
     });
   }
-
-
+  
 }

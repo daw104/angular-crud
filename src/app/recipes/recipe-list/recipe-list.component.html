@@ -46,7 +46,7 @@
         </td>
         <td class="d-flex">
           <i class="pi pi-trash mg-4 mx-2" (click)="deleteRecipe(recipes.id)" style="cursor: pointer"></i>
-          <i class="pi pi-pencil mg-4 mx-2" style="cursor: pointer"></i>
+          <i class="pi pi-pencil mg-4 mx-2" (click)="openModalUpdateRecipe(recipes.id)" style="cursor: pointer"></i>
         </td>
       </tr>
     </ng-template>
