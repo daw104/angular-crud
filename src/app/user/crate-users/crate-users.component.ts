@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {MessageService} from "primeng/api";
 import {Subject} from "rxjs";
 import {User} from "../../../model/User";
 import {UsersService} from "../../services/users.service";
@@ -15,7 +16,8 @@ export class CrateUsersComponent implements OnInit {
   isLoading!: boolean;
 
   constructor(
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _messageService: MessageService
   ) {
   }
 
@@ -47,6 +49,11 @@ export class CrateUsersComponent implements OnInit {
         this.createUserForm.reset();
         this._usersService.usersChanged.next();
         this.isLoading = false;
+        this._messageService.add({
+          severity: 'success',
+          summary: '',
+          detail: `Usuario ${userBody.email} creado correctamente`
+        });
       },
       error: (error) => {
       }

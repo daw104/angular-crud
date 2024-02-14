@@ -26,7 +26,6 @@ export class UpdateUserModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this._config);
     this.userId = this._config.data.userId;
     this.getUserById();
   }
@@ -34,7 +33,6 @@ export class UpdateUserModalComponent implements OnInit {
   getUserById() {
     this._usersService.getUserById(this.userId).subscribe({
       next: (response) => {
-        console.log(response);
         this.updateUserForm.patchValue({
           lastName: response.userData?.lastName,
           name: response.userData?.name,
@@ -48,7 +46,6 @@ export class UpdateUserModalComponent implements OnInit {
   }
 
   onUpdateUser() {
-    console.log(this.updateUserForm.value);
     const body = {
       userData: {
         name: this.updateUserForm.value?.name,
@@ -59,7 +56,6 @@ export class UpdateUserModalComponent implements OnInit {
     }
     this._usersService.updateUserById(this.userId, body).subscribe({
       next: (response) => {
-        console.log(response);
         this._dynamicDialogRef.close(true);
       },
       error: (error) => {

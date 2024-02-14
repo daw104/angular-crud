@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <form
   [formGroup]="createUserForm"
   (ngSubmit)="onCreateUser()">
@@ -33,18 +34,15 @@
               placeholder="Description"
               formControlName="description"> </textarea>
   </div>
-  <div class="pt-4">
-    <button type="submit"
-            class="btn btn-success mg-4">
+  <div class="pt-4 d-flex justify-content-center">
+    <button type="submit" class="btn btn-success mg-4 mx-2">
       <span *ngIf="isLoading"
             class="spinner-border spinner-border-sm"
-            role="status" aria-hidden="true"></span>
+            role="status"
+            aria-hidden="true">
+      </span>
       <span *ngIf="!isLoading">Save</span>
     </button>
-    <button type="button"
-            class="btn btn-danger mg-4"
-            (click)="onCanelForm()">
-      Cancel
-    </button>
+    <button type="button" class="btn btn-danger mg-4 mx-2" (click)="onCanelForm()">Cancel</button>
   </div>
 </form>

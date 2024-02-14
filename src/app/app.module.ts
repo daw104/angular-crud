@@ -5,8 +5,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from "@angular/router";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
 import {TableModule} from "primeng/table";
+import {ToastModule} from "primeng/toast";
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -57,9 +60,11 @@ import {UpdateUserModalComponent} from './user/update-user-modal/update-user-mod
     HttpClientModule,
     TableModule,
     DynamicDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastModule,
+    ConfirmDialogModule
   ],
-  providers: [ShoppingListService, RecipesService, DialogService],
+  providers: [ShoppingListService, RecipesService, DialogService, MessageService, DialogService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
